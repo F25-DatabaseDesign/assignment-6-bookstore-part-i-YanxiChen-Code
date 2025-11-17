@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<main>
+  <div id="searchTop">
+    <h2>Search Results</h2>
+    {% if query %}
+      <p>Showing results for: <strong>{{ query }}</strong></p>
+    {% else %}
+      <p>You didn't enter a search term. Try searching by title, author, or ISBN.</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">&larr; Back to Home</a></p>
+  </div>
+
+  <div id="searchResults">
+    {% if query %}
+      {% if results %}
+        <div class="booksGrid">
+          {% for book in results %}
+            <div class="book">
+              <div class="bookImage">
+                <img src="{{ url_for('static', filename='images/books/' ~ book.image) }}" alt="{{ book.title }}" />
+              </div>
+              <div class="bookDetailBox">
+                <p class="bookTitle">{{ book.title }}</p>
+                <p class="bookDetail">by {{ book.author }}</p>
+                <p class="bookDetail">ISBN: {{ book.isbn }}</p>
+                <p class="bookPrice">${{ '%.2f'|format(book.price) }}</p>
+                <div class="bookActions">
+                  <a class="actionButton" href="#">Add to cart</a>
+                  {% if book.readNow %}
+                    <a class="actionButton" href="#">Read Now</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No results found for "<strong>{{ query }}</strong>". Try a different keyword.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

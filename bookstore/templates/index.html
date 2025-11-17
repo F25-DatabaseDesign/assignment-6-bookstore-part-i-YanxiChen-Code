@@ -4,10 +4,10 @@
 <main>
     <div id="mainLeft">
         <!-- Insert some welcome text here -->
-        <h1 class="welcomeText">this is a heading</h1>
-        <p class="welcomeText">this is text row 1</p>
-        <p class="welcomeText">this is text row 2</p>
-        <p class="welcomeText">this is text row 3</p>
+        <h1 class="welcomeText">Welcome to NYU ReadTogether Bookstore</h1>
+        <p class="welcomeText">We’re committed to helping NYU students find high-quality physical books at the best prices.</p>
+        <p class="welcomeText">From classic detective stories and gripping mysteries to imaginative sci-fi adventures and essential textbooks, our shelves are stocked with carefully selected titles.</p>
+        <p class="welcomeText">Choose a category on the right to start discovering your next great read.</p>
     </div>
     <div id='mainRight'>
         <h1>Shop by category:</h1>
@@ -24,7 +24,10 @@
                     It should display an img element that corresponds to the category.  The image file should be stored in the static folder.  The assumption is that the category image filename is the same as the category name.
                     The general format should be
                     <a href="url with category Id parameter"><img = "image filename" alt = "image name"></a> -->
-
+                    <a href="{{ url_for('category', category_id=category.id) }}">
+                    <img src="{{ url_for('static', filename='images/categories/' ~ category.image) }}">
+                    <p>{{ category.name }}</p>
+                    </a>
                 </div>
             {%endfor%}
 
